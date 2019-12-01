@@ -14,6 +14,8 @@ const mock = mockServer(schema, {
     })
 })
 
+const port = process.env.PORT || 8080;
+
 const app = express()
 app.use(bodyParser.json())
 app.use(cors())
@@ -31,5 +33,5 @@ app.get('/graphql', async ({body: {query = '{}', variables = {} }}, res) => {
     const result = await mock.query(query, variables)
     res.send(result)
 })
-app.listen(9999, () => console.log('connected'))
+app.listen(port, () => console.log(`connected on port ${port}`))
 
